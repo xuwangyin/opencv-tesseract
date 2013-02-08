@@ -4,7 +4,7 @@
  */
 
 #include <baseapi.h>
-#include <allheaders.h>
+// #include <allheaders.h>
 #include <sys/time.h>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/core/core.hpp>
@@ -20,8 +20,8 @@ int main(int argc, char* argv[]) {
 
   printf("Tesseract-ocr version: %s\n",
          myOCR->Version());
-  printf("Leptonica version: %s\n",
-         getLeptonicaVersion());
+  // printf("Leptonica version: %s\n",
+  //        getLeptonicaVersion());
 
   if (myOCR->Init(NULL, "eng")) {
     fprintf(stderr, "Could not initialize tesseract.\n");
@@ -29,22 +29,18 @@ int main(int argc, char* argv[]) {
   }
 
   // read iamge
-  namedWindow("testocr", 0);
+  namedWindow("tesseract-opencv", 0);
   Mat image = imread("sample.png", 0);
 
   // set region of interest (ROI), i.e. regions that contain text
   Rect text1ROI(80, 50, 800, 110);
   Rect text2ROI(190, 200, 550, 50);
 
-  // create ROI images that contain text
-  Mat text1Img = image(text1ROI);
-  Mat text2Img = image(text2ROI);
-
   // recognize text
-  myOCR->TesseractRect( text1Img.data, 1, text1Img.step1(), 0, 0, text1Img.cols, text1Img.rows);
+  myOCR->TesseractRect( image.data, 1, image.step1(), text1ROI.x, text1ROI.y, text1ROI.width, text1ROI.height);
   const char *text1 = myOCR->GetUTF8Text();
 
-  myOCR->TesseractRect( text2Img.data, 1, text2Img.step1(), 0, 0, text2Img.cols, text2Img.rows);
+  myOCR->TesseractRect( image.data, 1, image.step1(), text2ROI.x, text2ROI.y, text2ROI.width, text2ROI.height);
   const char *text2 = myOCR->GetUTF8Text();
 
   // remove "newline"
@@ -75,24 +71,11 @@ int main(int argc, char* argv[]) {
   rectangle(scratch, text1ROI, Scalar(0, 0, 255), 2, 8, 0);
   rectangle(scratch, text2ROI, Scalar(0, 0, 255), 2, 8, 0);
 
-  imshow("testocr", scratch);
+  imshow("tesseract-opencv", scratch);
   waitKey(0);
 
   delete [] text1;
   delete [] text2;
-
-  // as a comparation, apply tesseract OCR to the whole image
-  Pix *pix = pixRead("sample.png");
-  myOCR->SetImage(pix);
-  char* outText = myOCR->GetUTF8Text();
-
-  // print found text
-  printf("\nWhole Image OCR output:");
-  printf(outText);
-
-  // destroy text and image
-  delete [] outText;
-  pixDestroy(&pix);
 
   // destroy tesseract OCR engine
   myOCR->Clear();
