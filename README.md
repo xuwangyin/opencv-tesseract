@@ -3,7 +3,6 @@
 
 Usage
 ----------------
-*** Unix/Linux
 1. install Tesseract, I found this
 [link](http://stackoverflow.com/questions/9152803/how-to-integrate-tesseract-ocr-library-to-a-c-program?answertab=active#tab-top) useful
 2. install [OpenCV](http://opencv.org/)
