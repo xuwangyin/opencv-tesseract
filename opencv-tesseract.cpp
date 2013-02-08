@@ -47,17 +47,21 @@ int main(int argc, char* argv[]) {
   myOCR->TesseractRect( text2Img.data, 1, text2Img.step1(), 0, 0, text2Img.cols, text2Img.rows);
   const char *text2 = myOCR->GetUTF8Text();
 
-  // print found text
-  printf("found text: \n");
-  printf(text1);
-  printf(text2);
-
   // remove "newline"
   string t1(text1);
   t1.erase(std::remove(t1.begin(), t1.end(), '\n'), t1.end());
 
   string t2(text2);
   t2.erase(std::remove(t2.begin(), t2.end(), '\n'), t2.end());
+
+  // print found text
+  printf("found text1: \n");
+  printf(t1.c_str());
+  printf("\n");
+
+  printf("found text2: \n");
+  printf(t2.c_str());
+  printf("\n");
 
   // draw text on original image
   Mat scratch = imread("sample.png");
@@ -83,7 +87,7 @@ int main(int argc, char* argv[]) {
   char* outText = myOCR->GetUTF8Text();
 
   // print found text
-  printf("Whole Image OCR output:\n\n");
+  printf("\nWhole Image OCR output:");
   printf(outText);
 
   // destroy text and image

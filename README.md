@@ -1,9 +1,14 @@
 > Arise ! For this matter is your responsibility, but we
 > will be with you; be courageous and act. --Ezra10:4
 
+Introduction
+----------------
+This simple program demonstrates using Tesseract OCR engine with OpenCV. The image is read using OpenCV 
+functionalities while the OCR is done using Tesseract.
+
 Usage
 ----------------
-1. install Tesseract, I found this
+1. install [Tesseract](https://code.google.com/p/tesseract-ocr/), I found this
 [link](http://stackoverflow.com/questions/9152803/how-to-integrate-tesseract-ocr-library-to-a-c-program?answertab=active#tab-top) useful
 2. install [OpenCV](http://opencv.org/)
 3. install [CMake](http://www.cmake.org/)
