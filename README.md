@@ -11,10 +11,7 @@ Usage
 1. install [Tesseract](https://code.google.com/p/tesseract-ocr/), I found this
 [link](http://stackoverflow.com/questions/9152803/how-to-integrate-tesseract-ocr-library-to-a-c-program?answertab=active#tab-top) useful
 2. install [OpenCV](http://opencv.org/)
-3. install [CMake](http://www.cmake.org/)
-4. checkout this project and go to "build" directory `cd build`,
-5. run `cmake ..; make` and the executable will be built in
-"build" directory, run the executable by issuing command `./opencv-tesseract`
+4. checkout the project and `make`
 
 Useful links
 ----------------
