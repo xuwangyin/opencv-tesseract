@@ -28,6 +28,9 @@ int main(int argc, char* argv[]) {
     exit(1);
   }
 
+  tesseract::PageSegMode pagesegmode = static_cast<tesseract::PageSegMode>(7); // treat the image as a single text line
+  myOCR->SetPageSegMode(pagesegmode);
+
   // read iamge
   namedWindow("tesseract-opencv", 0);
   Mat image = imread("sample.png", 0);
